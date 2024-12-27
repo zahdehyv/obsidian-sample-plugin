@@ -18,10 +18,11 @@ export default class MyPlugin extends Plugin {
         await this.loadSettings();
 
         // Add a ribbon icon to open the chatbot interface
-        this.addRibbonIcon('message-circle', 'Open Chatbot', () => {
+        this.addRibbonIcon('message-circle', 'Process INST', () => {
             const modal = new ChatbotModal(this.app);
             modal.onSubmit = async (messages) => {
                 try {
+                    console.log(messages)
                     const response = await this.processList(messages);
                     new Notice('Processing complete!');
                     console.log('Gemini response:', response);
@@ -72,7 +73,7 @@ export default class MyPlugin extends Plugin {
      */
     private async processList(items: { text: string }[]): Promise<string> {
         const genAI = new GoogleGenerativeAI(this.settings.GOOGLE_API_KEY);
-        const model = await genAI.getGenerativeModel({ model: 'gemini-pro' });
+        const model = await genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
 
         const listContent = items.map(item => item.text).join('\n');
         const prompt = `Here is a list of items:\n${listContent}\n\nGenerate a response based on this list:`;
