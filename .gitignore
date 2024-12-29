@@ -18,6 +18,8 @@ main.js
 # obsidian
 data.json
 
+#examples
+examples_to_ds/
+
 # Exclude macOS Finder (System Explorer) View States
 .DS_Store
-example.ts
